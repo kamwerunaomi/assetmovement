@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style='border:2px dotted black;padding:20px;width:710px' id='demo'>
+    <table style='width:700px'>
+        <tbody>
+            <tr>
+                
+                <td colspan=3>
+                    <div  style='float:right'>
+                        <img src="logo.png" style='width:70px' alt="">
+                    </div>
+                   
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+                    <p style='font-weight:bold'>Date: {{FORM.asset.Date}} </p>
+                    <p style='font-weight:bold'>Time: {{FORM.asset.Time}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+                    <p>Dear Security,</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+
+                    <p style="font-weight:bold">REF: <span style='text-decoration: underline;'>ASSET MOVEMENT FORM NUMBER: {{FORM.asset.SERIAL_NUMBER}}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+
+                    <p>Kindly allow {{FORM.asset.Firstname}} of ID Number {{FORM.asset.IDNumber}} to transfer the asset with details listed below:</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+                    <p style="font-weight:bold;font-size:0.8em">Asset Type: {{FORM.asset.type}}</p>
+                    <p style="font-weight:bold;font-size:0.8em">Asset Serial Number: {{FORM.asset.SerialNumber}}</p>
+                    <p style="font-weight:bold;font-size:0.8em">Asset From: {{FORM.asset.From}}</p>
+                    <p style="font-weight:bold;font-size:0.8em">To: {{FORM.asset.To}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <p style='margin-bottom:50px'>Collected By</p>
+                    <p style="font-weight:bold;font-size:0.8em">Name: </p>
+                    <p style="font-weight:bold;font-size:0.8em">For: </p>
+                </td>
+                <td></td>
+                <td style='float:right'>
+                    <p style='margin-bottom:50px'>Confirmed By</p>
+                    
+
+
+                    <p style="font-weight:bold;font-size:0.8em">Name: </p>
+                    <p style="font-weight:bold;font-size:0.8em">For: </p>
+                    
+                </td>
+            </tr>
+            <tr style='margin-top:50px'>
+                <td>
+                   <p style='color:#f1bd47'>www.tierdata.co.ke</p>
+                </td>
+                <td>
+
+                </td>
+                <td style='float:right'>
+                    <p style='font-weight:bold;color:lightblue'>Tier Data Limited</p>
+                    <p style='font-weight:300;color:lightblue'>9 th floor Southern Tower, Two Rivers</p>
+                </td>
+            </tr>
+            <tr>
+                <td style='background-color:blue;padding:5px'></td>
+                <td style='background-color:#f1bd47;padding:5px'></td>
+                <td style='background-color:gray;padding:5px'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <button type='button' style='padding:20px;background-color:blue;color:white' onclick="pdf();">Generate PDF</button>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/fonts/Roboto/Roboto-Medium.ttf"></script>
+  <script type="text/javascript">
+    function pdf() {
+      html2canvas(document.getElementById('demo'), {
+        onrendered: function(canvas) {
+          var data = canvas.toDataURL();
+          var docDefinition = {
+            watermark: {text: 'test watermark', color: 'blue', opacity: 0.3, bold: true, italics: false},
+        
+            content: [{
+              image: data,
+              width: 500
+            }]
+          };
+          pdfMake.createPdf(docDefinition).download("demo.pdf");
+        }
+      });
+    }
+  </script>
+  </script>
+</html>

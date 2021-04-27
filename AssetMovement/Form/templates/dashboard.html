@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% csrf_token %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Centum</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="records">Show all records</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="admin">Admin</a>
+                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Welcome, {{user.username}}</a>
+              </li>
+
+              
+            </ul>
+           
+          </div>
+        </div>
+      </nav>
+    <!-- <div class='row' style='margin:30px'>
+    <div class='col-md-12'>
+      <p style="align-self: center; background-color:; color: white;width: 200px;">ASSET MOVEMENT FORM</p>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  FILL IN THE ASSET MOVEMENT FORM.
+</button>
+
+    </div>
+</div> -->
+<!-- Actions -->
+<!-- <div class='row' style='margin:30px'>
+  <form method="POST">
+  {% csrf_token %}
+    <div class="col-md-12">
+       <table class='table'>
+           
+           <tbody>
+               <tr>
+                <td><a href="records">Show all records</a></td>
+                
+               </tr>
+               
+           </tbody>
+       </table>
+   </div>
+  </form>
+   
+</div> -->
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<!-- div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Asset Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div> -->
+       <div class="container">
+      
+            <div class="panel-heading">
+              <center>
+            <h5>Asset Movement</h5>
+          </center>
+          </div>
+          <div class="container" style="width: 500px; margin-top: 0px;">
+              <form action="/dashboard.html" class="form" method="POST" autocomplete="off">
+              {% csrf_token %}
+              <!-- <table>{{form.as_table}}</table> -->
+                
+                <div class="form-group">
+                  <div class="control-label">
+                <label for="asset_name"> Asset Type        
+                </label>
+                <input class='form-control'type="text" name="asset_name" placeholder="Asset Name" id="asset_name" required>
+                <!-- <select class='form-control' id="asset_name" name="asset_name" required>
+                <option label="Laptop">Laptop</option>
+                <option label="TV">TV</option>
+                <option label="Telephone">Telephone</option>
+                <option label="Desktop">Desktop</option>
+                </select> -->
+              </div>
+            </div>
+
+            <div class='form-group'>
+                <label for="asset_sn">Asset SerialNo
+                </label>
+                <input class='form-control'type="text" name="asset_sn" placeholder="Serial Number" id="asset_sn" required>
+            </div>
+              
+              <div class="form-group">
+                <label for="place_from">Place From
+                </label>
+                <input class='form-control'type="text" name="place_from" placeholder="Asset moving from.." id="place_from" required>
+                <!-- <select id="place_from" name="place_from" required class='form-control' >
+                <option label="Nabo">Nabo</option>
+                <option label="Tier Data">Tier Data</option>
+                <option label="Centum Capital">Centum Capital</option>
+                <option label="Two Rivers Lifestyle">Two Rivers Lifestyle</option>
+                </select> -->
+              </div>
+              <div class='form-group'>
+                <label for="place_to">Place To
+                </label>
+                <input class='form-control'type="text" name="place_to" placeholder="Asset moving to.." id="place_to" required>
+                <!-- <select id="place_to" name="place_to
+                " required class='form-control' >
+                <option label="Nabo">Nabo</option>
+                <option label="Tier Data">Tier Data</option>
+                <option label="Centum Capital">Centum Capital</option>
+                <option label="Two Rivers Lifestyle">Two Rivers Lifestyle</option>
+                </select> -->
+              </div>
+              
+              <div class='form-group'>
+                <label for="person_name">Receivers Name</label>
+                <input type="text" class='form-control' name="receivers_name" placeholder="Enter receiver's name" id="receivers_name" required>
+              </div>
+              <div class='form-group'>
+                <label for="person_id">Receivers ID Number</label>
+                <input type="text" class='form-control' name="receivers_id" placeholder="Enter receiver's ID number" id="receivers_id" required>
+              </div>
+              
+              <div class='form-group'>
+                <label for="person_id">Issued by</label>
+                <input type="text" class='form-control' name="confirmed_by" placeholder="Authorized by" id="confirmed_by" required>
+              </div>
+              <div class="form-group" style="display: none;">
+                <label class="control-label" for="reason">Form User</label>
+                <textarea id="form_user" name="form_user" rows="1" cols="20" class='form-control'>{{user.username}}</textarea>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="reason">Reason</label>
+                <textarea id="reason" name="reason" rows="7" cols="40" class='form-control'></textarea>
+              </div>
+              <div class='form-group' style='margin-top:10px'>
+
+              <button type="submit" value="Submit" id="pdf"  class="btn btn-info">Submit</button>
+              
+                    </div>
+      
+    </form>
+  </div>
+    <!-- </div>
+    </div>
+      
+    </div>
+  </div>
+</div> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
+{% else %}
+
+<div class="container p-5" style="position: absolute;
+      color: white;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      /*background: rgba(0,0,0,.5);*/
+      background-color: #0000A0;
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+      text-align: center;">
+  <p>WELCOME TO ASSET MOVEMENT PORTAL. PLEASE LOG IN</p>
+  <button class="btn btn-primary"><a href="{% url 'login' %}">Log In</a></button>
+  <button class="btn btn-primary"><a href="password_reset">Forgot Password?</a></button>
+</div>
+{% endif %}
+{% endblock %}

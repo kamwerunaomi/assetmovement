@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+<div style='float:left;margin:20px'>
+                <a href='/' class='btn btn-primary'>Back</a>
+                </div>
+                <div style='float:right;margin:20px'>
+
+                    <button class="btn btn-info" onclick="pdf()">DOWNLOAD DOCUMENT</button>
+                    <!-- <button class="btn btn-success" >UPDATE</button>
+                    <button class="btn btn-danger" >DELETE</button> -->
+                    <!-- <a href="upload">UPLOAD</a> -->
+                </div>
+                <br>
+    <div style='border:2px dotted black;padding:20px;width:750px;margin:20px;margin-top:50px' id='demo'>
+        
+    <table style='width:700px;background-image: url("logo.png")'>
+        <tbody>
+            <tr>
+                
+                <td colspan=3>
+                    <div  style='float:right'>
+                        <img src="icon.jpeg" style='width:70px' alt="">
+                    </div>
+                   
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+                    <p style='font-weight:bold'>Date: {{Form.date}} </p>
+                    <p style='font-weight:bold'>Time: {{Form.time}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+                    <p>Dear Security,</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+
+                    <p style="font-weight:bold">REF: <span style='text-decoration: underline;'>ASSET MOVEMENT FORM NUMBER: TDL_00{{Form.id}}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+
+                    <p>Kindly allow {{Form.receivers_name}} of ID Number {{Form.receivers_id}} to transfer the asset with details listed below:</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3>
+                    <p style="font-weight:bold;font-size:0.8em">Asset Type: {{Form.asset_name}}</p>
+                    <p style="font-weight:bold;font-size:0.8em">Asset Serial Number: {{Form.asset_sn}}</p>
+                    <p style="font-weight:bold;font-size:0.8em">From: {{Form.place_from}}</p>
+                    <p style="font-weight:bold;font-size:0.8em">To: {{Form.place_to}}</p>
+                    <p style="font-weight:bold;font-size:0.8em">Reason: {{Form.reason}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <p style='margin-bottom:50px'>Collected By</p>
+                    <p style="font-weight:bold;font-size:0.8em">Name:{{Form.receivers_name}} </p>
+                    <p style="font-weight:bold;font-size:0.8em">For:{{Form.place_to}} </p>
+                </td>
+                <td></td>
+                <td style='float:right'>
+                    <p style='margin-bottom:50px'>Confirmed By</p>
+                    
+
+
+                    <p style="font-weight:bold;font-size:0.8em">Name:{{Form.confirmed_by}} </p>
+                    <p style="font-weight:bold;font-size:0.8em">For:{{Form.place_from}} </p>
+                    
+                </td>
+            </tr>
+            <tr style='margin-top:50px'>
+                <td>
+                   <p style='color:#ffe390'>www.tierdata.co.ke</p>
+                </td>
+                <td>
+
+                </td>
+                <td style='float:right'>
+                    <p style='font-weight:bold;color:#82aace'>Tier Data Limited</p>
+                    <p style='font-weight:300;color:#82aace'>9 th floor Southern Tower, Two Rivers</p>
+                    <p style='font-weight:300;color:#82aace'>PO BOX 10518-00100, Nairobi Kenya</p>
+                    <p style='font-weight:300;color:#82aace'>Tel:+254202286800</p>
+                    <p style='font-weight:300;color:#82aace'>Cell:+254709902800</p>
+                </td>
+            </tr>
+            <tr>
+                <td style='background-color:#82aace;padding:5px;width: 400px'></td>
+                <td style='background-color:#ffe390;padding:5px;width: 100px'></td>
+                <td style='background-color:#dbe2ea;padding:5px'></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/fonts/Roboto/Roboto-Medium.ttf"></script>
+  <script type="text/javascript">
+    function pdf() {
+      html2canvas(document.getElementById('demo'), {
+        onrendered: function(canvas) {
+          var data = canvas.toDataURL();
+          var docDefinition = {
+            
+        
+            content: [{
+              image: data,
+              width: 500
+            }]
+          };
+          pdfMake.createPdf(docDefinition).download("gatepass.pdf");
+        }
+      });
+    }
+  </script>
+  </script>
+</html>

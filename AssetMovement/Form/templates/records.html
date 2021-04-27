@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Records</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Centum</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Dashboard</a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+              </li>
+              
+            </ul>
+           
+          </div>
+        </div>
+      </nav>
+    <div class='row' style='margin:30px'>
+        <div class='col-md-12'>
+             <h4>Records</h4>
+        </div>
+    <div class='col-md-12'>
+        <div class='card'>
+            <div class='card-header'>
+                <div class='card-title'>
+                   All Records
+                   <!-- {{myFilter.form}} -->
+                </div>
+            </div>
+            <div class='card-body'>
+                <div class="container">
+
+                  <h1></h1>
+                  <form method="POST">
+                    {% csrf_token %}
+                  <!-- <input style="width: 950px" autofocus autocomplete="off" class="form-control" placeholder="search" type="text" name="search" id="search"> -->
+                  <!-- <form method="POST">
+                    {% csrf_token %}
+                    {{myFilter.form}}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                  </form>
+                   -->
+
+                  <br>
+                  <br>
+                  <!-- From:<input type="date" name="fromdate">
+                  To:<input type="date" name="todate"> -->
+                  <input style="width: 500px;margin-bottom: 30px" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search " title="Type in a name">
+                  <!-- <button  type="submit" class="btn btn-info">SEARCH</button> -->
+                  <!-- <input type="submit" value="Search"> -->
+                   <table class='table' id="records">
+                    <tr style="border: 1px solid black ;">
+                      <!-- <th style="border: 1px solid black ;">Form Number</th> -->
+                      <th style="border: 1px solid black ;">Date</th>
+                      <th style="border: 1px solid black ;">Asset Name</th>
+                      <th style="border: 1px solid black ;">Asset Serial Number</th>
+                      <th style="border: 1px solid black ;">Place From</th>
+                      <th style="border: 1px solid black ;">Place To</th>
+                      <th style="border: 1px solid black ;">Receiver's Name</th>
+                      <th style="border: 1px solid black ;">Preview</th>
+                      <th style="border: 1px solid black ;">Option</th>
+                    </tr>
+                    {% for getdata in Form%}
+                    
+                    <tr style="border: 1px solid black ;">
+                      <!-- <td style="border: 1px solid black ;">{{getdata.id}}</td> -->
+                      <td style="border: 1px solid black ;">{{getdata.date}}</td>
+                      <td style="border: 1px solid black ;">{{getdata.asset_name}}</td>
+                      <td style="border: 1px solid black ;">{{getdata.asset_sn}}</td>
+                      <td style="border: 1px solid black ;">{{getdata.place_from}}</td>
+                      <td style="border: 1px solid black ;">{{getdata.place_to}}</td>
+                      <td style="border: 1px solid black ;">{{getdata.receivers_name}}</td>
+                      <td style="border: 1px solid black ;"><a href="showdata/{{getdata.id}}">PREVIEW</a></td>
+                      <td style="border: 1px solid black ;"><a href="upload?form_id={{getdata.id}}">UPLOAD</a></td>
+                      
+                    </tr>
+
+                    {% endfor %}
+                  </table>
+                </form>
+                <!-- <div style='float:left'>
+                <a href='dashboard.html' class='btn btn-primary'>Back</a>
+                </div>
+                <div style='float:right'>
+
+                    <button class="btn btn-info" onclick="pdf()">DOWNLOAD PDF</button>
+                    <button class="btn btn-success" >UPDATE</button>
+                    <button class="btn btn-danger" >DELETE</button>
+                    <a href="login/upload.html">UPLOAD</a>
+                </div> -->
+              
+            </div>
+        </div>
+   
+    </div>
+</div>
+<div class='row' style='margin:30px'>
+   
+</div>
+
+
+
+
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    
+  </body>
+
+  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js'></script>
+  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/fonts/Roboto/Roboto-Medium.ttf"></script>
+  <script type="text/javascript">
+    function pdf() {
+
+          html2canvas(document.getElementById("pdftable"), {
+          onrendered: function (canvas) {
+              var data = canvas.toDataURL();
+              var docDefinition = {
+              content: [{
+                image: data,
+                width: 500
+              }]
+              };
+              pdfMake.createPdf(docDefinition).download("gatepass.pdf");
+          }
+          });
+      }
+
+    $(document).ready(function() {
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#records tr").filter(function() {
+                        $(this).toggle($(this).text()
+                        .toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+
+    // function myFunction() {
+    //   var input, filter, table, tr, td, i, txtValue;
+    //   input = document.getElementById("myInput");
+    //   filter = input.value.toUpperCase();
+    //   table = document.getElementById("records");
+    //   tr = table.getElementsByTagName("tr");
+    //   for (i = 0; i < tr.length; i++) {
+    //     td = tr[i].getElementsByTagName("td")[2];
+    //     if (td) {
+    //       txtValue = td.textContent || td.innerText;
+    //       if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //         tr[i].style.display = "";
+    //       } else {
+    //         tr[i].style.display = "none";
+    //       }
+    //     }       
+    //   }
+    // }
+
+
+  </script>
+</html>

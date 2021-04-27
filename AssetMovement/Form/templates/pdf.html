@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data</title>
+
+  <style type="text/css">
+    body {  
+      margin:0;
+      padding:0;
+      font-family: sans-serif;
+      background: linear-gradient(#141e30, #243b55);
+    }
+    .container {
+      position: absolute;
+      color: black;
+      top: 50%;
+      left: 50%;
+      width: 700px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      /*background: rgba(0,0,0,.5);*/
+      background-color: #0000A0;
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+    }
+</style>
+
+</head>
+
+<body>
+  <div class="container">
+  <h2>Data Filled</h2>
+  
+    {% csrf_token %}
+    <table border="1" id="pdftable">
+      <thead>
+
+          <tr>
+            <th>Asset name</th>
+            <th>Asset sn</th>
+            <th>Place from</th>
+            <th>Place to</th>
+            <th>Person name</th>
+            <th>Person ID</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>{{Form.asset_name}}</td>
+            <td>{{Form.asset_sn}}</td>
+            <td>{{Form.place_from}}</td>
+            <td>{{Form.place_to}}</td>
+            <td>{{Form.person_name}}</td>
+            <td>{{Form.person_id}}</td>
+            <td>{{Form.reason}}</td>
+          </tr>
+          
+        </tbody>
+        </table>
+        <br>
+
+        <center>
+          <button onclick="pdf()">Download PDF</button>
+          <button>EDIT</button>
+        </center>
+        
+</div>
+</div>
+
+</body>
+<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js'></script>
+<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/fonts/Roboto/Roboto-Medium.ttf"></script>
+<script type="text/javascript">
+  function pdf() {
+
+        html2canvas(document.getElementById("pdftable"), {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+            content: [{
+              image: data,
+              width: 500
+            }]
+            };
+            pdfMake.createPdf(docDefinition).download("gatepass.pdf");
+        }
+        });
+    }
+
+</script>
+<!--   -->
+
+</html>
